@@ -30,10 +30,10 @@ Breech > set PAYLOAD /home/devkbnkz/rockyou.txt
 Breech > run
 ```
 ## Features
-* Makes use of the multiple CPU cores, which means it's faster than running on a single core.
-* Requests can be made with different user agent or even multiple user agents.
-* Support for multiple extensions. (.php|.html|.htm) or user defined extensions.
-* Simple to use user interface.
+- [x] Makes use of the multiple CPU cores, which means it's faster than running on a single core.
+- [ ] Requests can be made with different user agent or even multiple user agents.
+- [x] Support for multiple extensions. (.php|.html|.htm) or user defined extensions.
+- [x] Simple to use user interface.
 
 
 
