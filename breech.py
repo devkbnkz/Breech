@@ -29,18 +29,20 @@ app = Application()
 # Proxies to use when doing requests.
 PROXIES = {}
 
+# Extensions to use when doing requests.
+EXTENSIONS = ['']
+
 # How many CPU cores to use.
 CORES = 4
 
 def check_URL(lines):
     try:
         for line in lines:
-            url = str(app.target + '/' + line).strip('\n').strip(' ')
-            response = requests.get(url, headers={'User-Agent': 'XY'})
-            if response.status_code == 200:
-                print(Palette.GREEN.format('[+]') + ' Found: %s ' % url)
-            else:
-                print('Trying: %s - %s' % (url, response.status_code))
+            for extension in EXTENSIONS:
+                url = str(app.target + '/' + line).strip('\n').strip(' ') + extension
+                response = requests.get(url, headers={'User-Agent': 'XY'})
+                if response.status_code == 200:
+                    print(Palette.GREEN.format('[+]') + ' Found: %s ' % url)
     except KeyboardInterrupt:
         return
 
@@ -95,6 +97,11 @@ def add_command(variable: str):
         PROXIES[proxy_protocol] = 'http://%s:%s' % (proxy_address, proxy_port)
         # Added...
         repl.success('Successfully added.')
+    if variable == 'EXTENSION':
+        extension = input('Extension [.php|.html|.asp] > ')
+        if extension not in EXTENSIONS:
+            EXTENSIONS.append(extension)
+            repl.success('Successfully added.')
 
 @repl.command('set')
 def set_command(variable: str, value: str):
